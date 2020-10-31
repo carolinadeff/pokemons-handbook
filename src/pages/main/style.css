@@ -1,0 +1,74 @@
+#pokemons-list {
+    width: auto;
+    max-height: calc(100vh - 80px);
+    display: flex;
+    align-items: stretch;
+    padding: 0 30px;
+    background: #EEEEEE;
+
+}
+
+#pokemons-list .sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: stretch;
+    margin: 10px 70px 10px 0;
+}
+
+#pokemons-list .sidebar button {
+    height: 30px;
+    border: none;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#pokemons-list .sidebar button img {
+    width: 38px;
+    position: relative;
+    right: 16px;
+    bottom: 9px;
+    
+}
+
+#pokemons-list .sidebar button p {
+    color: #FFF; 
+    position: relative;
+    right: 12px;
+}
+
+#pokemons-list .list {
+    overflow-y: scroll;
+    margin: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+#pokemons-list .list::-webkit-scrollbar {
+    display: none;
+}
+
+#pokemons-list .list .card {
+    background: #FEFEFE;
+    border: solid 2px #BBB;
+    border-radius: 10px;
+    margin: 20px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    box-shadow: 0px 0px 15px 3px #CCC;
+
+}
+
+#pokemons-list .list .card img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 30px;
+}
+
