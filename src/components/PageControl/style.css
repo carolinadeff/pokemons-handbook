@@ -1,0 +1,29 @@
+#pokemons-list .page-control {
+    align-self: stretch;
+    margin-left: 0;
+    margin-right: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+#pokemons-list .page-control div {
+    display: flex;
+    align-items: center;
+}
+
+#pokemons-list .page-control p {
+    margin: 0 10px;
+    color: #BE213F;
+}
+
+#pokemons-list .page-control button {
+    border: none;
+    outline: none;
+    opacity: 0.8;
+    transition: 0.2s;
+    background: none;
+}
+
+#pokemons-list .page-control button:hover {
+    opacity: 1;
+}

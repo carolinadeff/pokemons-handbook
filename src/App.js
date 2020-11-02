@@ -1,16 +1,19 @@
-import Routes from "./routes";
 import "./styles.css";
+import { DataProvider } from "./contexts/DataContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
-import Header from './components/header'
+import Background from "./components/Background";
+import Routes from "./routes";
+
 
 function App() {
   return (
-    <ThemeProvider>
-        <div id="all">
-          <Header />
+    <DataProvider>
+      <ThemeProvider>
+        <Background>
           <Routes />
-        </div>
-    </ThemeProvider>
+        </Background>
+      </ThemeProvider>
+    </DataProvider>
   );
 }
 

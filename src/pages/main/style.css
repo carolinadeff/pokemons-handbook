@@ -1,37 +1,57 @@
 #pokemons-list {
+    box-sizing: border-box;
     width: auto;
     max-height: calc(100vh - 80px);
+    height: 100%;
     display: flex;
-    align-items: stretch;
-    padding: 0 30px;
-    background: #EEEEEE;
+    align-items: center;
+    padding: 40px;
+    background: #DEDEDE;
+    
+}
 
+.larger-area {
+    max-height: calc(100vh - 80px);
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 0 60px;
+   
 }
 
 #pokemons-list .sidebar {
+    align-self: stretch;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: stretch;
-    margin: 10px 70px 10px 0;
+    margin-left: 20px;
+    margin-right: 60px
 }
 
 #pokemons-list .sidebar button {
-    height: 30px;
+    height: 25px;
     border: none;
     border-radius: 15px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background: #888;
+    transition: 0.2s;
+}
+
+#pokemons-list .sidebar button:hover {
+    background: #AAA;
 }
 
 #pokemons-list .sidebar button img {
-    width: 38px;
+    width: 34px;
     position: relative;
-    right: 16px;
-    bottom: 9px;
-    
+    right: 20px;
+    bottom: 6px;
+    pointer-events: none;
 }
+
+
 
 #pokemons-list .sidebar button p {
     color: #FFF; 
@@ -39,30 +59,91 @@
     right: 12px;
 }
 
-#pokemons-list .list {
-    overflow-y: scroll;
-    margin: 20px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+#pokemons-list .listing-area {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
 }
 
-#pokemons-list .list::-webkit-scrollbar {
+#pokemons-list .search {
+    display: flex;
+    align-items: center;
+}
+
+#pokemons-list .search button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+    border: none;
+    outline: none;
+    opacity: 0.8;
+    transition: 0.2s;
+    background: none;
+}
+
+#pokemons-list .search button:hover {
+    opacity: 1;
+}
+
+#pokemons-list .search input {
+    width: 250px;
+    padding: 10px 3px 10px 35px;
+    font-size: 18px;
+    color: #555;
+    border-radius: 15px;
+    border: 2px solid #BBB;
+    background-image: url(../../images/lupa.svg);
+    background-size: 18px 18px;
+    background-position-x: 4%;
+    background-repeat: no-repeat;
+    background-position-y: center;
+    background-color: #FFF;
+    box-shadow:  0px 0px 6px 1px #AAA
+}
+
+#pokemons-list .container {
+    padding: 20px;
+    border-radius: 15px;
+    background: #FFF;
+    box-shadow:  0px 0px 6px 1px #AAA;
+}
+
+#pokemons-list .container .inner-container{
+    max-height: calc(100vh - 340px);
+    min-height: calc(100vh - 340px);
+    max-width: 560px;
+    min-width: 560px;
+   overflow-y: scroll;
+   background: #FFF;
+   
+}
+
+#pokemons-list .container .inner-container::-webkit-scrollbar {
     display: none;
 }
+
+#pokemons-list .container .list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+
 
 #pokemons-list .list .card {
     background: #FEFEFE;
     border: solid 2px #BBB;
     border-radius: 10px;
-    margin: 20px;
+    margin: 12px;
     padding: 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     text-decoration: none;
-    box-shadow: 0px 0px 15px 3px #CCC;
+    box-shadow: 0px 0px 6px 1px #DDD;
 
 }
 
@@ -71,4 +152,3 @@
     height: 100px;
     margin-bottom: 30px;
 }
-
