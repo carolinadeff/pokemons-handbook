@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import background from '../../images/background/main_background.jpg';
-import './style.css';
+import './styles.css';
 
 import { ThemeContext } from '../../contexts/ThemeContext'
 
 export default function Background({ children }) {
-    const { selectedTypeIndex, typeColorsDark, typeColorsLight, typeSymbols } = useContext(ThemeContext);
+    const { selectedTypeIndex, typeColorsDark, typeSymbols } = useContext(ThemeContext);
 
     if(selectedTypeIndex===-1){
         return(
@@ -19,7 +19,7 @@ export default function Background({ children }) {
         )    
     }else{
         return(
-            <div id="background" style={{backgroundImage: `linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,.3)), url(${typeSymbols[selectedTypeIndex]})`, backgroundSize: '45%', backgroundPositionY: '-30%', backgroundPositionX: '95%', backgroundRepeat: 'no-repeat'}}>
+            <div id="background" style={{backgroundImage: `linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,.1)), url(${typeSymbols[selectedTypeIndex]})`, backgroundSize: '950px', backgroundPositionY: '-150px', backgroundPositionX: '850px', backgroundRepeat: 'no-repeat'}}>
                 <header className="background-header" style={{background: typeColorsDark[selectedTypeIndex]}}>
                     <h2>The Pokemons Handbook</h2>
                 </header>

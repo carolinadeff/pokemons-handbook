@@ -10,15 +10,3 @@ body {
     font-family: 'Yanone Kaffeesatz', sans-serif;
     color: #333;
 }
-
-.loading {
-
-    width: 100vw;
-    height: 100vh;
-    padding: 50px;
-    color: #555;
-    font-size: 26px;
-    background-image: url('./images/background/loading_background.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-}

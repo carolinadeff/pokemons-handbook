@@ -2,6 +2,7 @@ import { createContext, useState, useEffect } from "react";
 
 import Axios from "axios";
 import api from "../services/api";
+import LoadingPage from '../components/LoadingPage'
 
 const DataContext = createContext();
 
@@ -22,8 +23,15 @@ function DataProvider({ children }) {
           completePokemon.types = response.data.types.map(
             (item) => item.type.name
           );
-          completePokemon.avatar =
+
+          if(response.data.sprites.other.dream_world.front_default) {
+            completePokemon.avatar =
             response.data.sprites.other.dream_world.front_default;
+          }else{
+            completePokemon.avatar =
+            response.data.sprites.front_default;
+          }
+          
         });
         return completePokemon;
       });
@@ -39,11 +47,7 @@ function DataProvider({ children }) {
   }, []);
 
   if (loading) {
-    return (
-      <div className="loading">
-        <h1>Loading...</h1>
-      </div>
-    );
+    return <LoadingPage />
   }
 
   return (

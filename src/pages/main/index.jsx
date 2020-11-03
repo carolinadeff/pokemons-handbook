@@ -4,14 +4,14 @@ import  { IoIosCloseCircleOutline } from 'react-icons/io'
 import { DataContext } from '../../contexts/DataContext'
 import { ThemeContext } from '../../contexts/ThemeContext'
 
-import "./style.css";
+import "./styles.css";
 
 import PageControl from '../../components/PageControl'
 
 export default function PokemonsList() {
 
   const { pokemons, types } = useContext(DataContext);
-  const { selectTypeIndex, typeColorsDark, typeSymbols } = useContext(ThemeContext);
+  const { selectTypeIndex, typeColorsDark, typeColorsLight, typeSymbols } = useContext(ThemeContext);
   
   const [selectedType, setSelectedType] = useState('');
   const [pokemonsTypeFiltered, setPokemonsTypeFiltered] = useState(pokemons);
@@ -23,7 +23,6 @@ export default function PokemonsList() {
   
   const [keyWord, setKeyWord] = useState('');
 
-
   useEffect(() => {
     const visible = [];
     pokemonsResearchFiltered.forEach(pokemon => {
@@ -33,7 +32,7 @@ export default function PokemonsList() {
     })
     setPokemonsView(visible)
     setCurrentPage(1)
-  }, [pokemonsTypeFiltered, pokemonsResearchFiltered])
+  }, [pokemonsTypeFiltered, pokemonsResearchFiltered, pokemons])
 
 
   function handleSelectType(type) {
@@ -101,9 +100,9 @@ export default function PokemonsList() {
             <div className="list">
               {pokemonsView.slice((currentPage-1)*pageLength, currentPage*pageLength).map(pokemon => {
                 return (
-                  <Link key={pokemon.id} to={`/details/${pokemon.id}`} className="card">
-                    <img src={pokemon.avatar} alt={pokemon.name} width="100px"/>
-                    <h4>{pokemon.name}</h4>
+                  <Link key={pokemon.id} to={`/details/${pokemon.id}`} className="card" >
+                    <div className="avatar-container" style={{background: typeColorsLight[types.map(type => type.name).indexOf(pokemon.types[0])]}}><img src={pokemon.avatar} alt={pokemon.name} width="100px"/></div>
+                    <div className="name-container"><h4>{pokemon.name}</h4></div> 
                   </Link>
                 );
               })}

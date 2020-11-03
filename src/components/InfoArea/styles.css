@@ -1,0 +1,94 @@
+#info-area {
+    position: absolute;
+    background: #f8f8f8;
+    left: 130px;
+    top: 130px;
+    border: 2.6px solid #f8f8f8;
+    border-radius: 15px;
+    width: 320px;
+    max-height: 70vh;
+    overflow: hidden;
+    padding: 25px;
+    box-shadow:  0px 0px 6px 1px #AAA;
+    z-index: 5;
+}
+
+@media (max-width: 1400px) {
+    #info-area {
+        left: 40px;
+        width: 260px;
+        font-size: 14px;
+    }
+}
+
+#info-area .instructions {
+    color: #888;
+    text-align: justify;
+    padding: 10px;
+    border-radius: 6px;
+    background: #fff;
+    overflow-y: scroll;
+}
+
+#info-area .instructions::-webkit-scrollbar{
+    display: none;
+}
+
+#info-area img {
+    position: absolute;
+    top: -45px;
+    right: -10px;
+    width: 150px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 20px 2px rgba(255,255,255,0.8);;
+}
+
+#info-area .type-info {
+    background-color: rgba(255,255,255,0.5);
+    padding: 10px;
+    border-radius: 6px;
+    width: 100%;
+    height: 100%;
+    color: #555;
+}
+
+#info-area .type-info div.text {
+    
+    margin: 10px 0 5px;
+    width: 100%;
+}
+
+#info-area .type-info .hability {
+    margin-bottom: 20px;
+}
+
+#info-area .type-info .hability div {
+    margin-top: 10px;
+    font-size: larger;
+    font-weight: 800;
+    padding: 10px;
+    border-radius: 5px;
+    color: rgba(255,255,255,0.9);
+    width: min-content;
+}
+
+#info-area .damages-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: flex-start;
+    color: rgba(255,255,255,0.9);
+    padding: 15px 0;
+    border-radius: 15px;
+}
+
+#info-area .damages-container div > div {
+    background-color: rgba(255,255,255,0.9);
+    color: #555;
+    padding: 8px;
+    border-radius: 6px;
+    text-align: center;
+    width: 45px;
+    height: 30px;
+    margin-bottom: 10px;
+}

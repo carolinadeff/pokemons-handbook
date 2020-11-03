@@ -1,6 +1,6 @@
 import React from 'react';
 import { IoIosArrowDropleft, IoIosArrowDropright, IoIosAddCircleOutline, IoIosRemoveCircleOutline } from 'react-icons/io'
-import './style.css'
+import './styles.css'
 
 export default function PageControl({ stateControl: { setCurrentPage, setPageLength, pageLength, currentPage, pokemonsView }}) {
 
