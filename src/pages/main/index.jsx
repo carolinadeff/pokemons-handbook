@@ -6,14 +6,15 @@ import { ThemeContext } from '../../contexts/ThemeContext'
 
 import "./styles.css";
 
+import SideBar from '../../components/SideBar'
 import PageControl from '../../components/PageControl'
 
 export default function PokemonsList() {
 
   const { pokemons, types } = useContext(DataContext);
-  const { selectTypeIndex, typeColorsDark, typeColorsLight, typeSymbols } = useContext(ThemeContext);
+  const { typeColorsLight } = useContext(ThemeContext);
   
-  const [selectedType, setSelectedType] = useState('');
+  
   const [pokemonsTypeFiltered, setPokemonsTypeFiltered] = useState(pokemons);
   const [pokemonsResearchFiltered, setPokemonsResearchFiltered] = useState(pokemons);
   const [pokemonsView, setPokemonsView] = useState(pokemons);
@@ -33,19 +34,6 @@ export default function PokemonsList() {
     setPokemonsView(visible)
     setCurrentPage(1)
   }, [pokemonsTypeFiltered, pokemonsResearchFiltered, pokemons])
-
-
-  function handleSelectType(type) {
-    if(selectedType===type){
-      setSelectedType('')
-      setPokemonsTypeFiltered(pokemons)
-      selectTypeIndex(-1)
-    }else{
-      setSelectedType(type)
-      selectTypeIndex(types.map(type => type.name).indexOf(type))
-      setPokemonsTypeFiltered(pokemons.filter((pokemon) => pokemon.types.includes(type))); 
-    }
-  }
 
 
   function handleKeyWord(e) {
@@ -70,21 +58,7 @@ export default function PokemonsList() {
     <div className="larger-area">
     <div id="pokemons-list">
 
-      <div className="sidebar">
-        {types.map((type, index) => {
-          return (
-            <button 
-              key={index}
-              type='button'
-              onClick={() => handleSelectType(type.name)}
-              style={{background: type.name === selectedType ? typeColorsDark[index] : ''}}
-            >
-              <img src={typeSymbols[index]} alt={type.name} />
-              <p>{type.name}</p>
-            </button>
-          )
-        })}
-      </div>
+      <SideBar typeInfo={{setPokemonsTypeFiltered}}/>
 
       <div className="listing-area">
 

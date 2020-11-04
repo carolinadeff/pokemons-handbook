@@ -1,0 +1,40 @@
+#pokemons-list .sidebar {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: stretch;
+    margin-left: 20px;
+    margin-right: 60px
+}
+
+#pokemons-list .sidebar button {
+    height: 25px;
+    border: none;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #888;
+    transition: 0.2s;
+}
+
+#pokemons-list .sidebar button:hover {
+    background: #AAA;
+}
+
+#pokemons-list .sidebar button img {
+    width: 34px;
+    position: relative;
+    right: 20px;
+    bottom: 6px;
+    pointer-events: none;
+}
+
+
+
+#pokemons-list .sidebar button p {
+    color: #FFF; 
+    position: relative;
+    right: 12px;
+}

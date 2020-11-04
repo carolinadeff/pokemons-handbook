@@ -8,7 +8,7 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    background: rgba(255,255,255,0.6);
+    background: rgba(255,255,255,0.8);
     z-index: 10;
     
 }
@@ -18,7 +18,23 @@
     border-radius: 15px;
     background: #fefefe;
     height: 85vh;
-    width: 85vw;
+    
+    max-width: 1300px;
+    margin-left: 5vw;
     margin-top: 6vh;
+    position: relative;
+    padding: 40px;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
 }
+
+#pokemon-details-container .close-details {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+
+
 

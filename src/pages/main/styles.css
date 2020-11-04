@@ -1,12 +1,11 @@
 #pokemons-list {
-    box-sizing: border-box;
     width: auto;
     max-height: calc(100vh - 80px);
     height: 100%;
     display: flex;
     align-items: center;
     padding: 40px 60px 40px 140px;
-    margin-left: 300px;
+    
     background: #DEDEDE;
 }
 
@@ -18,53 +17,16 @@
 }
 
 .larger-area {
+    margin-left: calc(14vw + 140px);
     max-height: calc(100vh - 80px);
     height: 100%;
     background: rgba(255, 255, 255, 0.8);
-    padding: 0 80px;
+    padding: 0 40px;
+   
 
 }
 
-#pokemons-list .sidebar {
-    align-self: stretch;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: stretch;
-    margin-left: 20px;
-    margin-right: 60px
-}
 
-#pokemons-list .sidebar button {
-    height: 25px;
-    border: none;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #888;
-    transition: 0.2s;
-}
-
-#pokemons-list .sidebar button:hover {
-    background: #AAA;
-}
-
-#pokemons-list .sidebar button img {
-    width: 34px;
-    position: relative;
-    right: 20px;
-    bottom: 6px;
-    pointer-events: none;
-}
-
-
-
-#pokemons-list .sidebar button p {
-    color: #FFF; 
-    position: relative;
-    right: 12px;
-}
 
 #pokemons-list .listing-area {
     height: 100%;
@@ -167,6 +129,14 @@
     height: 100px;
     position: relative;
     top: 20px;
+    transition: 0.2s;
+}
+
+
+#pokemons-list .list .card .avatar-container img:hover {
+    width: 105px;
+    height: 105px;
+    top: 15px;
 }
 
 #pokemons-list .list .card .name-container {

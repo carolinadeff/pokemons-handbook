@@ -1,78 +1,65 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import Axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
+import Axios from "axios";
 import api from "../../services/api";
-import './styles.css';
+import "./styles.css";
 
-import LoadingPage from '../../components/LoadingPage';
+import { IoIosCloseCircleOutline } from "react-icons/io";
+
+import LoadingPage from "../../components/LoadingPage";
+import DetailedInformation from "../../components/DetailedInformation";
+import MainInformation from "../../components/MainInformation";
 
 
 export default function PokemonDetails() {
-    const { id } = useParams();
 
-    const [pokemon, setPokemon] = useState({})
+  const { id } = useParams();
 
-    const [evolutionChain, setEvolutionChain] = useState('')
-    const [eggGroups, setEggGroups] = useState([])
-    const [habitat, setHabitat] = useState('')
+  const [pokemon, setPokemon] = useState({});
+  const [evolutionChain, setEvolutionChain] = useState([]);
+  const [speciesInfo, setSpeciesInfo] = useState({});
+  const [loading, setLoading] = useState(true);
 
-    const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+
+    (async () => {
+      const response = await api.get(`pokemon/${id}`);
+      setPokemon(response.data);
+
+      const responseSpecies = await Axios.get(response.data.species.url);
+      setSpeciesInfo(responseSpecies.data)
+
+      const responseEvolutionChain = await Axios.get(
+        responseSpecies.data.evolution_chain.url
+      );
+      setEvolutionChain(responseEvolutionChain.data.chain);
+
+      setLoading(false);
+    })();
     
+  }, [id]);
 
-    useEffect(() => {
-        (async()=>{
-            const response = await api.get(`pokemon/${id}`);
-            setPokemon(response.data)
 
-            const responseSpecies = await Axios.get(response.data.species.url);
+  if (loading) {
+    return <LoadingPage />;
+  }
 
-            setEggGroups(responseSpecies.data.egg_groups)
-            setHabitat(responseSpecies.data.habitat.name)
 
-            const responseEvolutionChain = await Axios.get(responseSpecies.data.evolution_chain.url)
-            const { chain } = responseEvolutionChain.data;
-            const evolChain = [chain.species.name];
-            
-            let evol = chain.evolves_to
+  return (
 
-            while (true) {
-                if (evol.length === 0) break;
-                evolChain.push(evol[0].species.name);
-                evol = evol[0].evolves_to;
-            }
+    <div id="pokemon-details-container">
+      <div className="pokemon-details">
 
-            setEvolutionChain(evolChain)
-
-            setLoading(false)
-        })()
+        <Link to='/' className="close-details">
+          <IoIosCloseCircleOutline size={40} color="darkRed"/>
+        </Link>
         
-    }, [id]) 
+        <MainInformation pokemonsInfo={{ pokemon, speciesInfo }}/>
+        <DetailedInformation pokemonsInfo={{ pokemon, speciesInfo, evolutionChain }}/>
 
+      </div>
+    </div>
 
-    if (loading) {
-        return <LoadingPage />
-    }
-
-    console.log(evolutionChain)
-
-    const organizedPokemon = {
-        name:pokemon.name,
-        image: pokemon.sprites.other['official-artwork'].front_default ? pokemon.sprites.other['official-artwork'].front_default : pokemon.sprites.other.dream_world.front_default,
-        types: pokemon.types.map(type => type.type.name),
-        height: pokemon.height,
-        wight:pokemon.weight,
-        abilities: pokemon.abilities,
-        stats: pokemon.stats,
-
-    }
-    
-    return (
-        <div id="pokemon-details-container">
-            <div className='pokemon-details'>
-                <p>{pokemon.name}</p>
-                <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`} alt="pokemon"/>
-            </div>
-        </div>
-        
-    )
+  )
 }

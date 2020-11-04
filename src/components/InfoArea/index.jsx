@@ -5,111 +5,85 @@ import "./styles.css";
 import instructions from "./instructions";
 
 export default function InfoArea() {
-
   const {
     selectedTypeIndex,
-    typeColorsLight,
     typeColorsDark,
     typeSymbols,
     typeInfo,
   } = useContext(ThemeContext);
-  
-  if(selectedTypeIndex !== -1 && typeInfo !== "") {
 
-    const { 
-      damage_relations: { 
+  if (selectedTypeIndex !== -1 && typeInfo !== "") {
+    const {
+      damage_relations: {
         double_damage_from,
         double_damage_to,
         half_damage_from,
         half_damage_to,
         no_damage_from,
-        no_damage_to 
+        no_damage_to,
+      },
+    } = typeInfo;
+
+    const damages = (intensity, damage) => {
+      if (damage.length === 0) {
+        return <div><div>{intensity}</div></div>;
       }
-    } = typeInfo
+      return (
+        <div>
+          <div>{intensity}</div>
+          {damage.map((damage, i) => (
+            <p key={i}>{damage.name}</p>
+          ))}
+        </div>
+      );
+    };
 
     return (
-      <section
-        id="info-area"
-        style={{
-          background: typeColorsLight[selectedTypeIndex],
-          borderColor: typeColorsDark[selectedTypeIndex],
-        }}
-      >
+      <section id="info-area">
         <img src={typeSymbols[selectedTypeIndex]} alt={typeInfo.name} />
 
         <div className="type-info">
-          
-          <section className='hability'>
+          <section className="hability">
             <h4>Tipo de habilidade:</h4>
-            <div style={{background: typeColorsDark[selectedTypeIndex] }}><p>{typeInfo.move_damage_class ? typeInfo.move_damage_class.name : 'none'}</p></div>
-          </section>
-        
-          <section className='caused-damages'>
-            <div className="text"><h4>Danos causados aos outros Pokemons:</h4></div> 
-            <div className="damages-container" style={{background: typeColorsDark[selectedTypeIndex] }}>
-              <div>
-              <div>2 x</div>
-              {double_damage_to.length > 0 ? (
-                double_damage_to.map((damage, i) => <p key={i}>{damage.name}</p>)
-              ) : (
-                <p>Nenhum</p>
-              )}
-            </div>
             <div>
-            <div>1/2 x</div>
-              {half_damage_to.length > 0 ? (
-                half_damage_to.map((damage, i) => <p key={i}>{damage.name}</p>)
-              ) : (
-                <p>Nenhum</p>
-              )}
-            </div>
-            <div>
-              <div>0</div>
-              {no_damage_to.length > 0 ? (
-                no_damage_to.map((damage, i) => <p key={i}>{damage.name}</p>)
-              ) : (
-                <p>Nenhum</p>
-              )}
-            </div>
+              <p>
+                {typeInfo.move_damage_class
+                  ? typeInfo.move_damage_class.name
+                  : ""}
+              </p>
             </div>
           </section>
 
-          <section className='suffered-damages'>
-          <div className="text"><h4>Danos sofridos pelos outros Pokemons:</h4></div>
-            <div className="damages-container" style={{background: typeColorsDark[selectedTypeIndex] }}>
-            <div>
-              <div>2 x</div>
-              {double_damage_from.length > 0 ? (
-                double_damage_from.map((damage, i) => <p key={i}>{damage.name}</p>)
-              ) : (
-                <p>Nenhum</p>
-              )}
+          <section className="caused-damages">
+            <div className="text">
+              <h4>Danos causados aos outros Pokemons:</h4>
             </div>
-            <div>
-              <div>1/2 x</div>
-              {half_damage_from.length > 0 ? (
-                half_damage_from.map((damage, i) => <p key={i}>{damage.name}</p>)
-              ) : (
-                <p>Nenhum</p>
-              )}
-            </div>
-            <div>
-              <div>0</div>
-              {no_damage_from.length > 0 ? (
-                no_damage_from.map((damage, i) => <p key={i}>{damage.name}</p>)
-              ) : (
-                <p>Nenhum</p>
-              )}
-            </div>
+            <div
+              className="damages-container"
+              style={{ background: typeColorsDark[selectedTypeIndex] }}
+            >
+              {damages("2 X", double_damage_to)}
+              {damages("1/2 X", half_damage_to)}
+              {damages("0 X", no_damage_to)}
             </div>
           </section>
-         
-          
-            
+
+          <section className="suffered-damages">
+            <div className="text">
+              <h4>Danos sofridos pelos outros Pokemons:</h4>
+            </div>
+            <div
+              className="damages-container"
+              style={{ background: typeColorsDark[selectedTypeIndex] }}
+            >
+              {damages("2 X", double_damage_from)}
+              {damages("1/2 X", half_damage_from)}
+              {damages("0 X", no_damage_from)}
+            </div>
+          </section>
         </div>
       </section>
-    )
-
+    );
   }
 
   return (
