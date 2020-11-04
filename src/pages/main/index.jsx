@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { DataContext } from "../../contexts/DataContext";
@@ -6,68 +6,24 @@ import { ThemeContext } from "../../contexts/ThemeContext";
 
 import "./styles.css";
 
+import usePokemons from '../../customHooks/usePokemons'
+
 import InfoArea from "../../components/InfoArea";
 import SideBar from "../../components/SideBar";
 import PageControl from "../../components/PageControl";
 
 export default function PokemonsList() {
-  const { pokemons, types } = useContext(DataContext);
-  const { typeColorsLight, selectTypeIndex } = useContext(ThemeContext);
+  const { types } = useContext(DataContext);
+  const { typeColorsLight } = useContext(ThemeContext);
 
-  const [selectedType, setSelectedType] = useState('');
-
-  const [pokemonsTypeFiltered, setPokemonsTypeFiltered] = useState(pokemons);
-  const [pokemonsResearchFiltered, setPokemonsResearchFiltered] = useState(pokemons);
-  const [pokemonsView, setPokemonsView] = useState(pokemons);
+  const { pokemonsView, selectedType, handleSelectType, handleKeyWord, handleSetKeyWord, keyWord, clearResearch } = usePokemons()
 
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLength, setPageLength] = useState(18);
 
-  const [keyWord, setKeyWord] = useState("");
+  
 
-  useEffect(() => {
-    const visible = [];
-    pokemonsResearchFiltered.forEach((pokemon) => {
-      if (
-        pokemonsTypeFiltered.some((pokemonType) => {
-          return pokemonType.name === pokemon.name;
-        })
-      )
-        visible.push(pokemon);
-    });
-    setPokemonsView(visible);
-    setCurrentPage(1);
-  }, [pokemonsTypeFiltered, pokemonsResearchFiltered, pokemons]);
-
-  function handleSelectType(type) {
-    if(selectedType===type){
-      setSelectedType('');
-      setPokemonsTypeFiltered(pokemons);
-      selectTypeIndex(-1);
-    }else{
-      setSelectedType(type);
-      setPokemonsTypeFiltered(pokemons.filter((pokemon) => pokemon.types.includes(type))); 
-      selectTypeIndex(types.map(type => type.name).indexOf(type));
-    }
-  }
-
-  function handleKeyWord(e) {
-    const find = [];
-    if (e.key === "Enter") {
-      const research = new RegExp(keyWord, "i", "g");
-      pokemons.forEach((pokemon) => {
-        if (research.test(pokemon.name)) {
-          find.push(pokemon);
-        }
-      });
-      setPokemonsResearchFiltered(find);
-    }
-  }
-
-  function clearResearch() {
-    setKeyWord("");
-    setPokemonsResearchFiltered(pokemons);
-  }
+  
 
   function increasePage() {
     const lenght = pageLength + 3;
@@ -100,7 +56,7 @@ export default function PokemonsList() {
           <div className="search">
             <input
               value={keyWord}
-              onChange={(e) => setKeyWord(e.target.value)}
+              onChange={(e) => handleSetKeyWord(e.target.value)}
               onKeyDown={(e) => handleKeyWord(e)}
             />
             <button type="button" onClick={() => clearResearch()}>
