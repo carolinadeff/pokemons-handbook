@@ -15,6 +15,8 @@ export default function SideBar({ typeInfo }) {
 
     const [selectedType, setSelectedType] = useState('');
 
+  
+
     function handleSelectType(type) {
         if(selectedType===type){
           setSelectedType('');

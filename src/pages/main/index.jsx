@@ -6,6 +6,7 @@ import { ThemeContext } from '../../contexts/ThemeContext'
 
 import "./styles.css";
 
+import InfoArea from "../../components/InfoArea";
 import SideBar from '../../components/SideBar'
 import PageControl from '../../components/PageControl'
 
@@ -56,7 +57,10 @@ export default function PokemonsList() {
 
   return (
     <div className="larger-area">
+
     <div id="pokemons-list">
+
+      <InfoArea/>
 
       <SideBar typeInfo={{setPokemonsTypeFiltered}}/>
 

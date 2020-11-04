@@ -4,16 +4,9 @@
     height: 100%;
     display: flex;
     align-items: center;
-    padding: 40px 60px 40px 140px;
+    padding: 40px 100px 40px 140px;
     
     background: #DEDEDE;
-}
-
-@media (max-width: 1400px) {
-    #pokemons-list {
-        margin-left: 180px;
-        padding: 40px 40px 40px 120px;
-    }
 }
 
 .larger-area {
@@ -22,11 +15,7 @@
     height: 100%;
     background: rgba(255, 255, 255, 0.8);
     padding: 0 40px;
-   
-
 }
-
-
 
 #pokemons-list .listing-area {
     height: 100%;

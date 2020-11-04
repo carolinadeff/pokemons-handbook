@@ -1,70 +1,29 @@
-# Getting Started with Create React App
+Pokemons Handbook
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Disponível em: https://pokemons-handbook.herokuapp.com/
 
-## Available Scripts
+O Pokemons Handbook é uma aplicação que consome dados da API https://pokeapi.co/ e apresenta informações sobre Pokemons e seus tipos.
+Na página principal são listados todos os pokemons em cards, e cada um pode ser acessado para detalhes sobre o pokemon.
 
-In the project directory, you can run:
+Na barra inferior está a navegação entre páginas, e um controle de quantos registros exibir por página.
 
-### `yarn start`
+Na barra vertical à esquerda da lista estão listados os tipos de pokemons. Ao selecionar um tipo, somente pokémons que pertencem a ele são exibidos.
+Para retornar à listagem completa basta clicar novamente sobre o tipo selecionado.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Na barra acima da listagem pode-se pesquisar Pokémons pelo nome ou trecho do nome (E assim serão apresentados todos com essa correspondencia).
+A pesquisa está submetida à seleção de tipo, ou seja, se um tipo estiver selecionado, somente pokemons daquele tipo serão retornados.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Clicando sobre os pokémons da lista são apresentados detalhes sobre cada um deles:
+<ul>
+    <li>Cadeia de evolução</li>
+    <li>tipos, habitat e grupos de ovos</li>
+    <li>Habilidades e stats</li>
+    <li>Peso, altura e forma</li>
+</ul>
+<br/>
+Na cadeia de evolução é possível navegar para os outros pokémons da família.
+Para voltar à lista, clique sobre o "X" no canto superior direito.
 
-### `yarn test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Para rodar o projeto, clone o código, e no terminal, na pasta do projeto dê o comando yarn add ou npm install, conforme o gerenciador de pacotes que utiliza, para instalar as dependências.
+Depois, rode com yarn start ou npm start.
