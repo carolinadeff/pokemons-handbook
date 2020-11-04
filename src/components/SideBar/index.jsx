@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { DataContext } from "../../contexts/DataContext";
@@ -6,16 +6,12 @@ import { DataContext } from "../../contexts/DataContext";
 import './styles.css';
 
 
-export default function SideBar({ typeInfo }) {
-
-    const {setPokemonsTypeFiltered} = typeInfo
+export default function SideBar() {
 
     const { selectTypeIndex, typeColorsDark, typeSymbols } = useContext(ThemeContext);
-    const { pokemons, types } = useContext(DataContext);
+    const { pokemons, types, setPokemonsTypeFiltered } = useContext(DataContext);
 
     const [selectedType, setSelectedType] = useState('');
-
-  
 
     function handleSelectType(type) {
         if(selectedType===type){

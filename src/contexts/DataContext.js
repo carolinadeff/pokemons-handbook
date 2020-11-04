@@ -8,6 +8,7 @@ const DataContext = createContext();
 
 function DataProvider({ children }) {
   const [pokemons, setPokemons] = useState([]);
+  const [pokemonsTypeFiltered, setPokemonsTypeFiltered] = useState([]);
   const [types, setTypes] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -37,6 +38,7 @@ function DataProvider({ children }) {
       });
 
       setPokemons(pokemonsList);
+      setPokemonsTypeFiltered(pokemonsList);
 
       const typesResponse = await api.get("type");
       const typesList = typesResponse.data.results.slice(0, 18);
@@ -51,7 +53,7 @@ function DataProvider({ children }) {
   }
 
   return (
-    <DataContext.Provider value={{ pokemons, types }}>
+    <DataContext.Provider value={{ pokemons, types, pokemonsTypeFiltered, setPokemonsTypeFiltered }}>
       {children}
     </DataContext.Provider>
   );

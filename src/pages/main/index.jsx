@@ -12,11 +12,11 @@ import PageControl from '../../components/PageControl'
 
 export default function PokemonsList() {
 
-  const { pokemons, types } = useContext(DataContext);
+  const { pokemons, types, pokemonsTypeFiltered } = useContext(DataContext);
   const { typeColorsLight } = useContext(ThemeContext);
   
   
-  const [pokemonsTypeFiltered, setPokemonsTypeFiltered] = useState(pokemons);
+  
   const [pokemonsResearchFiltered, setPokemonsResearchFiltered] = useState(pokemons);
   const [pokemonsView, setPokemonsView] = useState(pokemons);
 
@@ -24,6 +24,9 @@ export default function PokemonsList() {
   const [pageLength, setPageLength] = useState(18);
   
   const [keyWord, setKeyWord] = useState('');
+
+
+
 
   useEffect(() => {
     const visible = [];
@@ -62,7 +65,7 @@ export default function PokemonsList() {
 
       <InfoArea/>
 
-      <SideBar typeInfo={{setPokemonsTypeFiltered}}/>
+      <SideBar />
 
       <div className="listing-area">
 
