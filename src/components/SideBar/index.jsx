@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { DataContext } from "../../contexts/DataContext";
@@ -6,24 +6,15 @@ import { DataContext } from "../../contexts/DataContext";
 import './styles.css';
 
 
-export default function SideBar() {
+export default function SideBar({controlType}) {
 
-    const { selectTypeIndex, typeColorsDark, typeSymbols } = useContext(ThemeContext);
-    const { pokemons, types, setPokemonsTypeFiltered } = useContext(DataContext);
+    const { handleSelectType, selectedType } = controlType
 
-    const [selectedType, setSelectedType] = useState('');
+    const { typeColorsDark, typeSymbols } = useContext(ThemeContext);
+    const { types } = useContext(DataContext);
 
-    function handleSelectType(type) {
-        if(selectedType===type){
-          setSelectedType('');
-          setPokemonsTypeFiltered(pokemons);
-          selectTypeIndex(-1);
-        }else{
-          setSelectedType(type);
-          setPokemonsTypeFiltered(pokemons.filter((pokemon) => pokemon.types.includes(type))); 
-          selectTypeIndex(types.map(type => type.name).indexOf(type));
-        }
-      }
+    
+
 
     return (
         <div className="sidebar">

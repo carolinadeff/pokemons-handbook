@@ -10,9 +10,7 @@ import LoadingPage from "../../components/LoadingPage";
 import DetailedInformation from "../../components/DetailedInformation";
 import MainInformation from "../../components/MainInformation";
 
-
 export default function PokemonDetails() {
-
   const { id } = useParams();
 
   const [pokemon, setPokemon] = useState({});
@@ -20,15 +18,13 @@ export default function PokemonDetails() {
   const [speciesInfo, setSpeciesInfo] = useState({});
   const [loading, setLoading] = useState(true);
 
-
   useEffect(() => {
-
     (async () => {
       const response = await api.get(`pokemon/${id}`);
       setPokemon(response.data);
 
       const responseSpecies = await Axios.get(response.data.species.url);
-      setSpeciesInfo(responseSpecies.data)
+      setSpeciesInfo(responseSpecies.data);
 
       const responseEvolutionChain = await Axios.get(
         responseSpecies.data.evolution_chain.url
@@ -37,29 +33,26 @@ export default function PokemonDetails() {
 
       setLoading(false);
     })();
-    
   }, [id]);
-
 
   if (loading) {
     return <LoadingPage />;
   }
 
-
   return (
-
     <div id="pokemon-details-container">
       <div className="pokemon-details">
-
-        <Link to='/' className="close-details">
-          <IoIosCloseCircleOutline size={40} color="darkRed"/>
+        <Link to="/" className="close-details">
+          <IoIosCloseCircleOutline size={40} color="darkRed" />
         </Link>
-        
-        <MainInformation pokemonsInfo={{ pokemon, speciesInfo }}/>
-        <DetailedInformation pokemonsInfo={{ pokemon, speciesInfo, evolutionChain }}/>
 
+        <MainInformation 
+          pokemonsInfo={{ pokemon, speciesInfo }} 
+        />
+        <DetailedInformation
+          pokemonsInfo={{ pokemon, speciesInfo, evolutionChain }}
+        />
       </div>
     </div>
-
-  )
+  );
 }
