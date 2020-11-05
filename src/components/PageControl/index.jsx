@@ -7,8 +7,9 @@ import {
 } from "react-icons/io";
 import "./styles.css";
 
-export default function PageControl({ pageControl }) {
-  
+import usePokemons from "../../customHooks/usePokemons";
+
+export default function PageControl() {
   const {
     decreasePage,
     increasePage,
@@ -17,7 +18,7 @@ export default function PageControl({ pageControl }) {
     pageLength,
     currentPage,
     pokemonsView,
-  } = pageControl;
+  } = usePokemons();
 
   return (
     <footer className="page-control">

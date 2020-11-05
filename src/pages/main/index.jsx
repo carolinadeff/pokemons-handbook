@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { DataContext } from "../../contexts/DataContext";
@@ -6,7 +6,7 @@ import { ThemeContext } from "../../contexts/ThemeContext";
 
 import "./styles.css";
 
-import usePokemons from '../../customHooks/usePokemons'
+import usePokemons from "../../customHooks/usePokemons";
 
 import InfoArea from "../../components/InfoArea";
 import SideBar from "../../components/SideBar";
@@ -16,41 +16,28 @@ export default function PokemonsList() {
   const { types } = useContext(DataContext);
   const { typeColorsLight } = useContext(ThemeContext);
 
-  const { pokemonsView, selectedType, handleSelectType, handleKeyWord, handleSetKeyWord, keyWord, clearResearch } = usePokemons()
+  const {
+    pokemonsView,
+    selectedType,
+    handleSelectType,
+    handleKeyWord,
+    handleSetKeyWord,
+    keyWord,
+    clearResearch,
+    currentPage,
+    pageLength,
+  } = usePokemons();
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pageLength, setPageLength] = useState(18);
-
-  
-
-  
-
-  function increasePage() {
-    const lenght = pageLength + 3;
-    setPageLength(lenght);
-  }
-
-  function decreasePage() {
-    const lenght = pageLength - 3;
-    setPageLength(lenght);
-  }
-
-  function prevPage() {
-    const page = currentPage - 1;
-    setCurrentPage(page);
-  }
-
-  function nextPage() {
-    const page = currentPage + 1;
-    setCurrentPage(page);
-  }
+  console.log(
+    pokemonsView.slice((currentPage - 1) * pageLength, currentPage * pageLength)
+  );
 
   return (
     <div className="larger-area">
       <div id="pokemons-list">
         <InfoArea />
 
-        <SideBar  controlType={ {handleSelectType, selectedType} } />
+        <SideBar controlType={{ handleSelectType, selectedType }} />
 
         <div className="listing-area">
           <div className="search">
@@ -106,17 +93,7 @@ export default function PokemonsList() {
             </div>
           </div>
 
-          <PageControl
-            pageControl={{
-              decreasePage,
-              increasePage,
-              prevPage,
-              nextPage,
-              pageLength,
-              currentPage,
-              pokemonsView,
-            }}
-          />
+          <PageControl />
         </div>
       </div>
     </div>

@@ -1,66 +1,106 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from "react";
 
 import { ThemeContext } from "../contexts/ThemeContext";
 import { DataContext } from "../contexts/DataContext";
 
 export default function usePokemons() {
-    const { selectTypeIndex } = useContext(ThemeContext);
-    const { pokemons, types } = useContext(DataContext);
-    
-    const [selectedType, setSelectedType] = useState('');
-    const [pokemonsTypeFiltered, setPokemonsTypeFiltered] = useState(pokemons);
-    const [pokemonsResearchFiltered, setPokemonsResearchFiltered] = useState(pokemons);
-    const [pokemonsView, setPokemonsView] = useState(pokemons);
-    const [keyWord, setKeyWord] = useState("");
+  const { selectTypeIndex } = useContext(ThemeContext);
+  const { pokemons, types } = useContext(DataContext);
 
-    useEffect(() => {
+  const [selectedType, setSelectedType] = useState("");
+  const [pokemonsTypeFiltered, setPokemonsTypeFiltered] = useState(pokemons);
+  const [pokemonsResearchFiltered, setPokemonsResearchFiltered] = useState(
+    pokemons
+  );
+  const [pokemonsView, setPokemonsView] = useState(pokemons);
+  const [keyWord, setKeyWord] = useState("");
 
-        const visible = [];
-        pokemonsResearchFiltered.forEach((pokemon) => {
-          if (
-            pokemonsTypeFiltered.some((pokemonType) => {
-              return pokemonType.name === pokemon.name;
-            })
-          )
-            visible.push(pokemon);
-        });
-        setPokemonsView(visible);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageLength, setPageLength] = useState(18);
 
-      }, [pokemonsTypeFiltered, pokemonsResearchFiltered, pokemons]);
-    
-      function handleSelectType(type) {
-        if(selectedType===type){
-          setSelectedType('');
-          setPokemonsTypeFiltered(pokemons);
-          selectTypeIndex(-1);
-        }else{
-          setSelectedType(type);
-          setPokemonsTypeFiltered(pokemons.filter((pokemon) => pokemon.types.includes(type))); 
-          selectTypeIndex(types.map(type => type.name).indexOf(type));
+  useEffect(() => {
+    const visible = [];
+    pokemonsResearchFiltered.forEach((pokemon) => {
+      if (
+        pokemonsTypeFiltered.some((pokemonType) => {
+          return pokemonType.name === pokemon.name;
+        })
+      )
+        visible.push(pokemon);
+    });
+    setPokemonsView(visible);
+    setCurrentPage(1);
+  }, [pokemonsTypeFiltered, pokemonsResearchFiltered, pokemons]);
+
+  function handleSelectType(type) {
+    if (selectedType === type) {
+      setSelectedType("");
+      setPokemonsTypeFiltered(pokemons);
+      selectTypeIndex(-1);
+    } else {
+      setSelectedType(type);
+      setPokemonsTypeFiltered(
+        pokemons.filter((pokemon) => pokemon.types.includes(type))
+      );
+      selectTypeIndex(types.map((type) => type.name).indexOf(type));
+    }
+  }
+
+  function handleSetKeyWord(word) {
+    setKeyWord(word);
+  }
+
+  function handleKeyWord(e) {
+    const find = [];
+    if (e.key === "Enter") {
+      const research = new RegExp(keyWord, "i", "g");
+      pokemons.forEach((pokemon) => {
+        if (research.test(pokemon.name)) {
+          find.push(pokemon);
         }
-      }
+      });
+      setPokemonsResearchFiltered(find);
+    }
+  }
 
-      function handleSetKeyWord(word){
-          setKeyWord(word)
-      }
-    
-      function handleKeyWord(e) {
-        const find = [];
-        if (e.key === "Enter") {
-          const research = new RegExp(keyWord, "i", "g");
-          pokemons.forEach((pokemon) => {
-            if (research.test(pokemon.name)) {
-              find.push(pokemon);
-            }
-          });
-          setPokemonsResearchFiltered(find);
-        }
-      }
-    
-      function clearResearch() {
-        setKeyWord("");
-        setPokemonsResearchFiltered(pokemons);
-      }
+  function clearResearch() {
+    setKeyWord("");
+    setPokemonsResearchFiltered(pokemons);
+  }
 
-      return { pokemonsView, selectedType, handleSelectType, handleKeyWord, handleSetKeyWord, keyWord ,clearResearch }
+  function increasePage() {
+    const lenght = pageLength + 3;
+    setPageLength(lenght);
+  }
+
+  function decreasePage() {
+    const lenght = pageLength - 3;
+    setPageLength(lenght);
+  }
+
+  function prevPage() {
+    const page = currentPage - 1;
+    setCurrentPage(page);
+  }
+
+  function nextPage() {
+    const page = currentPage + 1;
+    setCurrentPage(page);
+  }
+
+  return {
+    pokemonsView,
+    selectedType,
+    handleSelectType,
+    handleKeyWord,
+    handleSetKeyWord,
+    keyWord,
+    clearResearch,
+    increasePage,
+    decreasePage,
+    prevPage,
+    nextPage,
+    currentPage,
+    pageLength,
+  };
 }
