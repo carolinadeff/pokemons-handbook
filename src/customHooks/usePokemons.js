@@ -40,7 +40,7 @@ export default function usePokemons() {
     } else {
       setSelectedType(type);
       setPokemonsTypeFiltered(
-        pokemons.filter((pokemon) => pokemon.types.includes(type))
+        pokemons.filter((pokemon) => pokemon.types ? pokemon.types.includes(type) : false)
       );
       selectTypeIndex(types.map((type) => type.name).indexOf(type));
     }
